@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--    <meta charset="UTF-8">-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gothons from planet Percal 25</title>
+<link rel="stylesheet" type="text/css" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<style>
+
+table.text  {
+    width:  100%; /* Ширина таблицы */
+    border-spacing: 0; /* Расстояние между ячейками */
+}
+    table.text td {
+    width: 50%; /* Ширина ячеек */
+    vertical-align: top; /* Выравнивание по верхнему краю */
+    margin: -15px 20px 0px;
+}
+    td.rightcol { /* Правая ячейка */
+    text-align: right; /* Выравнивание по правому краю */
+    margin: -15px 20px 0px;
+    color: #C0C0C0;
+}
+
+.invite {
+    margin: -15px 20px 10px 20px;
+}
+
+.upper_block {
+    background-color: #0078ab;
+    color: #C0C0C0;
+}
+
+
+pre {
+    background-color: RGB(249, 201, 16); /* Цвет фона под заголовком */
+    border: solid 1px black;border: solid 2px #ffda57;
+}
+
+/* Popup container - can be anything you want */
+.popup {
+    color: green;
+    padding-left: 30px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 25%;
+    margin-left: -5px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 17%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+.pic {
+text-align: center;
+}
+
+  </style>
+</head>
+<body>
+<div class="upper_block">
+  {% if current_user.is_anonymous %}
+    <br>
+    <div class="invite">
+      <h6> New User? <a href="{{ url_for('register') }}" style="color: white">Click to register!</a>
+        <a> or </a><a href="{{ url_for('login') }}" style="color: white">Login</a><a> to play!</a></h6>
+    </div>
+  <hr color="grey">
+  {% else %}
+  <table class="text">
+   <tr>
+    <td><a href="{{ url_for('logout') }}" style="color: white">Logout</a></td>
+    <td class="rightcol"><h4>Your score: {{ current_user.normalized_score() }}</h4></td>
+   </tr>
+  </table>
+  {% endif %}
+</div>
+{% block content %}
+
+{% endblock %}
+
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+</script>
+</body>
+</html>

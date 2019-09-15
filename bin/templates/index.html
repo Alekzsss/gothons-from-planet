@@ -1,0 +1,16 @@
+{% extends "game_layout.html" %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+    <h2>Hi, {{ current_user.username }}!</h2><br>
+    <h5>Which route do you wanna take?</h5>
+    <ul>
+        <li><a href="{{ url_for('map1') }}">Escape from the spaceship</a></li>
+        <li><a href="{{ url_for('map2') }}">Побег с комического корабля</a></li>
+    </ul>
+    {% else %}
+    <h3 align="center">text-based adventure</h3>
+    <h1 align="center"><font color="green">"Gothons from planet Percal 25"</font></h1><br><br>
+    <p class="pic"><img src="/static/images/gothons.jpg" width="50%" height="50%" alt="Picture"></p>
+    {% endif %}
+{% endblock %}

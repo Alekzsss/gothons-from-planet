@@ -1,0 +1,23 @@
+{% extends "game_layout.html" %}
+
+{% block content %}
+
+<h1> {{ room.name }} </h1>
+<pre class="description">
+{{ room.description }}
+</pre>
+{% if room.name in ["death", "The End", "Конец"] %}
+    <form action="/play_again">
+        <button type="submit">Play again?</button>
+    </form>
+{% else %}
+    <p>
+    <form action="/game" method="POST">
+        - <input type="text" name="action"><input type="submit" class="btn btn-default" value="ok"><br>
+        <div class="popup" onclick="myFunction()">Hint!
+            <span class="popuptext" id="myPopup">{{ room.hint }}</span>
+        </div>
+    </form>
+    <p/>
+{% endif %}
+{% endblock %}
