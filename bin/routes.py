@@ -74,11 +74,13 @@ def delete_state():
 @login_required
 def game():
     room_name = session.get('room_name')
-    print(room_name)
-    if "ru" in room_name:
-        map = planisphere_ru.rooms
+    if not room_name:
+        redirect(url_for('index'))
     else:
-        map = planisphere.rooms
+        if "ru" in room_name:
+            map = planisphere_ru.rooms
+        else:
+            map = planisphere.rooms
 
 
     if request.method == 'GET':
